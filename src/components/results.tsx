@@ -6,13 +6,17 @@ interface ResultsProps {
 }
 
 const placas = {
+  "a18-saliencia-lombada": "A18 - Saliência de Lombada",
+  "a32b-passagem-sinalizada-pedestres": "A32b - Passagem Sinalizada de Pedestres",
   "r1-parada-obrigatoria": "R1 - Parada Obrigatória",
+  "r2-de-preferencia": "R2 - De Preferência",
+  "r24a-sentido-circulacao-via": "R24a - Sentido de Circulação da Via / Pista",
+  "r25a-vire-esquerda": "R25a - Vire à Esquerda",
+  "r28-duplo-sentido-circulacao": "R28 - Duplo Sentido de Circulação",
   "r3-sentido-proibido": "R3 - Sentido Proibido",
   "r4a-proibido-virar-esquerda": "R4a - Proibido Virar à Esquerda",
   "r4b-proibido-virar-direita": "R4b - Proibido Virar à Direita",
   "r5a-proibido-retornar-esquerda": "R5a - Proibido Retornar à Esquerda",
-  "r24a-sentido-circulacao-via": "R24a - Sentido de Circulação da Via / Pista",
-  "r28-duplo-sentido-circulacao": "R28 - Duplo Sentido de Circulação",
 };
 
 const Results = ({ response, loading }: ResultsProps) => {
@@ -38,7 +42,8 @@ const Results = ({ response, loading }: ResultsProps) => {
       <p>
         Placa(s):{" "}
         {response.predicted_classes.length === 1
-          ? response.predicted_classes[0]
+          ? // @ts-expect-error type error
+            placas[response.predicted_classes[0]]
           : // @ts-expect-error type error
             response.predicted_classes.map((item) => placas[item] + ",")}
       </p>
